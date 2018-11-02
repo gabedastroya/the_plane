@@ -12,10 +12,11 @@
 #define PIN_JOY2_X_THR 2
 
 //data pos.
-#define DATA_POSITION_THR 0
-#define DATA_POSITION_ROLL 1
-#define DATA_POSITION_PITCH 2
-#define DATA_COUNT 3
+#define DATA_POSITION_SYNC 0
+#define DATA_POSITION_THR 1
+#define DATA_POSITION_ROLL 2
+#define DATA_POSITION_PITCH 3
+#define DATA_COUNT 4
 
 //array of bytes for reading the potentiometer
 int data[DATA_COUNT];
@@ -40,6 +41,7 @@ void setup() {
 
 void loop() {
   //lets read data from joystick values
+  data[DATA_POSITION_SYNC] = 0xAAAA;
   data[DATA_POSITION_THR] = analogRead(PIN_JOY2_X_THR);
   data[DATA_POSITION_ROLL] = analogRead(PIN_JOY1_Y_ROLL);
   data[DATA_POSITION_PITCH] = analogRead(PIN_JOY1_X_PITCH);
@@ -48,7 +50,7 @@ void loop() {
   Serial.print(" Throttle: ");
   Serial.print(data[DATA_POSITION_THR]);
   Serial.print(" Roll: ");
-  Serial.println(data[DATA_POSITION_ROLL]);
+  Serial.print(data[DATA_POSITION_ROLL]);
   Serial.print(" Pitch: ");
   Serial.println(data[DATA_POSITION_PITCH]);
 
