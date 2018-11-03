@@ -50,10 +50,21 @@ void setup() {
 
 void update_servos ()
 {
-  
+   //printing debug info
+  Serial.print(" Throttle: ");
+  Serial.print(data[DATA_POSITION_THR]);
+  Serial.print(" Roll: ");
+  Serial.print(data[DATA_POSITION_ROLL]);
+  Serial.print(" Pitch: ");
+  Serial.println(data[DATA_POSITION_PITCH]);
+
 }
 
 void loop() {
+  if (!mySerial.available()) //check if data is available 
+  {
+   return; 
+  }
   byte this_byte = mySerial.read();
   //check for sync integer
   if (rx_index == 1 || rx_index == 0) 
